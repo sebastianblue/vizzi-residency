@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizzi Art Alliance — A residency in the Sicilian interior</title>
+<meta name="description" content="An artist residency in the hills outside Palermo. Time, space, and good company for emerging artists to muse, play, and make together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A2620;
+    --ink-soft:#5B5243;
+    --paper:#F7F1E6;
+    --paper-2:#EFE4D2;
+    --ochre:#B9772E;
+    --olive:#5E613A;
+    --clay:#9C4A2E;
+    --line:#DBCDB1;
+    --maxw:1180px;
+    --gut:clamp(20px,5vw,72px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.05;margin:0}
+  .display{font-optical-sizing:auto}
+
+  /* ——— utility / eyebrow ——— */
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ochre);
+  }
+  .coords{font-variant-numeric:tabular-nums;letter-spacing:.04em}
+
+  /* ——— layout helpers ——— */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+  section{padding:clamp(64px,9vw,118px) 0}
+
+  /* ——— top bar ——— */
+  header.bar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,241,230,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-in{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:clamp(14px,2.4vw,30px);
+    max-width:var(--maxw);margin:0 auto;padding:14px var(--gut)}
+  .mark{font-family:"Fraunces",serif;font-size:20px;font-weight:500;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+  .mark span{color:var(--ochre)}
+  nav.links{display:flex;gap:clamp(14px,2vw,28px);align-items:center;justify-content:center;min-width:0}
+  nav.links a{font-size:14px;line-height:1;text-decoration:none;color:var(--ink-soft);white-space:nowrap;transition:color .2s}
+  nav.links a:hover{color:var(--ink)}
+  .bar-coords{font-size:12px;line-height:1.2;color:var(--ink-soft);letter-spacing:.04em;white-space:nowrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;font-size:14.5px;font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;
+    padding:10px 20px;border-radius:999px;background:var(--ink);color:var(--paper);
+    border:1px solid var(--ink);transition:background .2s,color .2s,transform .2s;
+  }
+  .btn:hover{background:var(--clay);border-color:var(--clay);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  @media (max-width:1040px){
+    .bar-in{grid-template-columns:auto minmax(0,1fr) auto}
+    .bar-coords{display:none}
+  }
+  @media (max-width:760px){
+    .bar-in{grid-template-columns:1fr auto;padding:12px var(--gut)}
+    nav.links{display:none}
+    .bar .btn{font-size:13.5px;padding:11px 16px}
+  }
+
+  /* ——— hero ——— */
+  .hero{position:relative;min-height:min(88vh,780px);display:flex;align-items:flex-end;
+    color:var(--paper);overflow:hidden;padding:0}
+  .hero .img-bg,.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero img.bg{object-position:center 38%}
+  .hero .img-bg{background:linear-gradient(160deg,#c9a96e 0%,#7c6a44 60%,#3c3526 100%)}
+  .hero .scrim{position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(28,24,18,.84) 0%,rgba(28,24,18,.45) 46%,rgba(28,24,18,.12) 100%)}
+  .hero-in{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%;
+    padding:0 var(--gut) clamp(48px,7vw,88px)}
+  .hero .eyebrow{color:#E6C892}
+  .hero h1{font-size:clamp(40px,7.2vw,84px);max-width:14ch;margin:.32em 0 .5em;
+    font-weight:300;color:#FBF6EC}
+  .hero h1 em{font-style:italic;font-weight:400}
+  .hero p.lede{font-size:clamp(17px,2vw,21px);max-width:46ch;color:#F0E7D6;margin:0 0 28px}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .hero .btn:hover{background:var(--clay);color:#fff;border-color:var(--clay)}
+  .hero .btn.ghost{background:transparent;color:#FBF6EC;border-color:rgba(251,246,236,.55)}
+  .hero .btn.ghost:hover{background:rgba(251,246,236,.12);border-color:#FBF6EC}
+  .parallax-img{will-change:transform}
+  @media (prefers-reduced-motion:reduce){.parallax-img{transform:none!important}}
+
+  /* ——— thesis ——— */
+  .thesis .wrap{max-width:980px}
+  .thesis p{font-family:"Fraunces",serif;font-weight:300;
+    font-size:clamp(24px,3.4vw,40px);line-height:1.28;letter-spacing:-.01em;margin:.4em 0 0}
+  .thesis em{font-style:italic;color:var(--ochre)}
+  .rule{width:54px;height:2px;background:var(--ochre);border:0;margin:0}
+
+  /* ——— overview fact sheet ——— */
+  .facts{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .facts .grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,80px);align-items:start}
+  .facts h2{font-size:clamp(28px,3.6vw,44px);font-weight:300}
+  .facts h2 .coords{display:block;font-size:13px;font-family:"Inter",sans-serif;letter-spacing:.08em;
+    color:var(--ink-soft);margin-top:14px;text-transform:uppercase;font-weight:600}
+  dl.sheet{margin:0;display:grid;gap:0}
+  dl.sheet>div{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:18px;
+    padding:18px 0;border-top:1px solid var(--line)}
+  dl.sheet>div:first-child{border-top:0;padding-top:0}
+  dl.sheet dt{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);padding-top:3px}
+  dl.sheet dd{margin:0;color:var(--ink)}
+  @media (max-width:760px){
+    .facts .grid{grid-template-columns:1fr}
+    dl.sheet>div{grid-template-columns:1fr;gap:5px;padding:15px 0}
+  }
+
+  /* ——— editorial split ——— */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:center}
+  .split.rev .col-media{order:2}
+  .split h2{font-size:clamp(28px,4vw,46px);font-weight:300;margin:.35em 0 .6em;max-width:14ch}
+  .split p{margin:0 0 1.05em;color:var(--ink-soft)}
+  .split p strong{color:var(--ink);font-weight:600}
+  .figure{position:relative;background:linear-gradient(150deg,var(--paper-2),#d9c9a8);
+    border-radius:3px;overflow:hidden;box-shadow:0 22px 50px -28px rgba(42,38,32,.5);aspect-ratio:4/5}
+  .figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+  .figure:hover img{transform:scale(1.035)}
+  .figure.wide{aspect-ratio:5/4}
+  .figure.tall{aspect-ratio:3/4}
+  .figure.center-top img{object-position:center 22%}
+  @media (max-width:760px){
+    .split{grid-template-columns:1fr;gap:28px}
+    .split.rev .col-media{order:0}
+  }
+
+  /* ——— panoramic band ——— */
+  .band{position:relative;height:clamp(220px,32vw,380px);overflow:hidden;
+    background:linear-gradient(120deg,#c2a566,#6f6440)}
+  .band img{width:100%;height:112%;object-fit:cover;object-position:center 42%;margin-top:-3%;will-change:transform}
+  .band .tag{position:absolute;left:var(--gut);right:var(--gut);bottom:26px;color:#FBF6EC;z-index:2;
+    text-shadow:0 1px 14px rgba(20,16,10,.6)}
+  .band .tag .coords{font-size:13px;letter-spacing:.1em;font-weight:600;color:#E6C892;text-transform:uppercase}
+  .band .tag .place{font-family:"Fraunces",serif;font-size:clamp(20px,3vw,30px);font-weight:300}
+  .band:after{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgba(20,16,10,.62),rgba(20,16,10,.22) 64%,rgba(20,16,10,.08))}
+
+  /* ——— included / list cards ——— */
+  .included h2{font-size:clamp(28px,4vw,46px);font-weight:300;max-width:16ch}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:clamp(28px,4vw,44px)}
+  .cards .card{background:var(--paper);padding:clamp(24px,3.4vw,40px)}
+  .cards .card h3{font-size:21px;font-weight:500;margin-bottom:8px}
+  .cards .card .n{font-family:"Fraunces",serif;font-size:14px;color:var(--ochre);
+    font-style:italic;display:block;margin-bottom:14px}
+  .cards .card p{margin:0;color:var(--ink-soft);font-size:15.5px}
+  .included-media{margin-top:clamp(28px,4vw,44px)}
+  .included-media .figure{aspect-ratio:16/7}
+  .included-media img{object-position:center 26%}
+  @media (max-width:680px){.included-media .figure{aspect-ratio:4/3}}
+  @media (max-width:680px){.cards{grid-template-columns:1fr}}
+
+  /* ——— people ——— */
+  .people{background:var(--paper);border-top:1px solid var(--line)}
+  .people-head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,6vw,78px);align-items:end}
+  .people-head h2{font-size:clamp(28px,4vw,46px);font-weight:300;margin:.35em 0 0;max-width:15ch}
+  .people-head p{margin:0;color:var(--ink-soft);max-width:54ch}
+  .people-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:clamp(28px,4vw,44px)}
+  .person{display:grid;grid-template-columns:minmax(150px,.72fr) 1fr;background:var(--paper);min-height:260px}
+  .person figure{margin:0;overflow:hidden;background:var(--paper-2)}
+  .person img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+  .person-copy{padding:clamp(22px,3vw,34px)}
+  .person-copy h3{font-size:24px;font-weight:400;margin:0 0 8px}
+  .person-copy p{margin:0;color:var(--ink-soft);font-size:15.5px;line-height:1.6}
+  .person-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  .person-link:hover{text-decoration:underline;text-underline-offset:4px}
+  .role{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);margin-bottom:14px}
+  @media (max-width:900px){
+    .people-head,.people-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .person{grid-template-columns:1fr}
+    .person figure{aspect-ratio:4/3}
+  }
+
+  /* ——— accordion ——— */
+  .details-wrap{max-width:880px}
+  details{border-top:1px solid var(--line)}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:24px 0;display:flex;align-items:center;
+    justify-content:space-between;gap:20px;font-family:"Fraunces",serif;font-size:clamp(19px,2.4vw,24px);font-weight:400}
+  summary::-webkit-details-marker{display:none}
+  summary .plus{flex:0 0 auto;width:26px;height:26px;position:relative;transition:transform .3s}
+  summary .plus:before,summary .plus:after{content:"";position:absolute;background:var(--ochre);
+    top:50%;left:50%;transform:translate(-50%,-50%)}
+  summary .plus:before{width:16px;height:2px}
+  summary .plus:after{width:2px;height:16px;transition:transform .3s}
+  details[open] summary .plus:after{transform:translate(-50%,-50%) scaleY(0)}
+  details .body{padding:0 0 26px;color:var(--ink-soft);max-width:64ch}
+  details .body p{margin:0 0 .9em}
+  details .body p:last-child{margin-bottom:0}
+
+  /* ——— gallery ——— */
+  .gallery{display:grid;grid-template-columns:1.12fr .88fr 1fr;gap:14px;margin-top:clamp(28px,4vw,44px)}
+  .gallery .figure{aspect-ratio:1/1;box-shadow:none}
+  .gallery .figure:nth-child(2){aspect-ratio:4/5}
+  .gallery .figure:nth-child(3){aspect-ratio:1/1.12}
+  @media (max-width:680px){.gallery{grid-template-columns:1fr}.gallery .figure,.gallery .figure:nth-child(2),.gallery .figure:nth-child(3){aspect-ratio:4/3}}
+
+  /* ——— apply band ——— */
+  .apply{background:var(--ink);color:var(--paper);text-align:center}
+  .apply .eyebrow{color:#E0A75E}
+  .apply h2{font-size:clamp(30px,5vw,58px);font-weight:300;color:#FBF6EC;max-width:18ch;margin:.3em auto .5em}
+  .apply h2 em{font-style:italic}
+  .apply p{color:#D8CDB9;max-width:48ch;margin:0 auto 30px}
+  .apply .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);font-size:16px;padding:14px 32px}
+  .apply .btn:hover{background:var(--clay);color:#fff;border-color:var(--clay)}
+  .interest-form{max-width:780px;margin:38px auto 0;text-align:left;display:grid;gap:18px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .field{display:grid;gap:8px}
+  .field.full{grid-column:1/-1}
+  label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#E0A75E}
+  input,textarea,select{
+    width:100%;border:1px solid rgba(247,241,230,.26);border-radius:4px;background:rgba(247,241,230,.08);
+    color:#FBF6EC;font:inherit;padding:13px 14px;outline:none;
+  }
+  textarea{min-height:138px;resize:vertical}
+  input:focus,textarea:focus,select:focus{border-color:#E0A75E;background:rgba(247,241,230,.12)}
+  .form-note{margin:0;color:#BEB19B;font-size:13.5px;text-align:center}
+  .interest-form .btn{justify-self:center;min-width:180px}
+  @media (max-width:680px){.form-grid{grid-template-columns:1fr}}
+
+  /* ——— footer ——— */
+  footer{background:var(--paper-2);border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+  .foot-in{max-width:var(--maxw);margin:0 auto;padding:clamp(48px,6vw,72px) var(--gut);
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+  footer .mark{font-size:22px;color:var(--ink);display:block;margin-bottom:14px}
+  footer .mark span{color:var(--ochre)}
+  footer h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 14px;font-weight:600}
+  footer a{color:var(--ink-soft);text-decoration:none}
+  footer a:hover{color:var(--ink);text-decoration:underline}
+  footer ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .memoriam{font-family:"Fraunces",serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:14px}
+  .fineprint{border-top:1px solid var(--line);text-align:center;padding:18px var(--gut);font-size:12.5px;color:var(--ink-soft)}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:30px}}
+
+  /* ——— reveal ——— */
+  .reveal{opacity:1;transform:none;transition:opacity .8s ease,transform .8s ease}
+
+  :focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- ===== top bar ===== -->
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="#top">Vizzi <span>Art Alliance</span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#residency">The residency</a>
+      <a href="#place">The place</a>
+      <a href="#included">What's included</a>
+      <a href="#people">People</a>
+      <a href="#details">Details</a>
+    </nav>
+    <span class="bar-coords coords">37.93523° N · 13.67945° E</span>
+    <a class="btn" href="#apply">Register interest</a>
+  </div>
+</header>
+
+<!-- ===== hero ===== -->
+<section class="hero" id="top" style="scroll-margin-top:0">
+  <div class="img-bg"></div>
+  <img class="bg parallax-img" data-parallax="0.16" alt="Artists gathered around a long studio table during a residency"
+       loading="eager"
+       src="media/Archive/artist-collab-big-table.jpg"
+       onerror="this.style.display='none'">
+  <div class="scrim"></div>
+  <div class="hero-in reveal">
+    <p class="eyebrow">Province of Palermo, Sicily</p>
+    <h1 class="display">Time to wander, in a <em>Sicilian farmhouse.</em></h1>
+    <p class="lede">An artist residency in the hills outside Palermo — a place for emerging artists to muse, play, and make together. Bring a question, not a deadline.</p>
+    <div class="cta-row">
+      <a class="btn" href="#apply">Register interest</a>
+      <a class="btn ghost" href="#residency">What it is</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== thesis ===== -->
+<section class="thesis">
+  <div class="wrap reveal">
+    <hr class="rule">
+    <p>Not a place to <em>finish</em> things. A place to begin them — or simply to have unhurried time, good materials, and other artists at the table.</p>
+  </div>
+</section>
+
+<!-- ===== overview fact sheet ===== -->
+<section class="facts" id="residency">
+  <div class="wrap">
+    <div class="grid reveal">
+      <div>
+        <p class="eyebrow">Overview</p>
+        <h2 class="display">A short residency in the quiet season.
+          <span class="coords">Sicilian interior</span>
+        </h2>
+      </div>
+      <dl class="sheet">
+        <div><dt>Duration</dt><dd>Two weeks</dd></div>
+        <div><dt>Who it's for</dt><dd>Emerging artists, recently out of school, comfortable working independently and generously alongside others</dd></div>
+        <div><dt>The experience</dt><dd>A small cross-disciplinary cohort shares studios and a table — focused making, balanced with real creative community</dd></div>
+        <div><dt>Cost to artist</dt><dd>$500 (2 weeks) plus housing (varies); artists are responsible for travel, food, and materials</dd></div>
+        <div><dt>What's included</dt><dd>Studio access, shared workspace, and communal meals; limited material support as the season allows</dd></div>
+        <div><dt>Disciplines</dt><dd>Performance · music &amp; composition · sculpture · printmaking &amp; comics · photography · visual art</dd></div>
+        <div><dt>Dates</dt><dd>Spring and fall sessions, announced ahead of each cohort</dd></div>
+        <div><dt>To apply</dt><dd>Register your interest below and tell us what kind of time, space, and work you are looking for.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== about the residency ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="split reveal">
+      <div class="col-text">
+        <p class="eyebrow">About the residency</p>
+        <h2 class="display">Time, space, and good company.</h2>
+        <p>The Alliance offers time and room to artists who want to think with their hands. Residents spend two weeks in shared studios, with space for sound, sculpture, print, and whatever a project asks for.</p>
+        <p><strong>It's a self-directed experience.</strong> No classes, no critiques, nothing owed at the end. The point is the making and the company — to follow an idea without a deadline pulling at it.</p>
+        <p>Studios are shared with a small group, which is the whole idea: enough quiet to concentrate, enough overlap to be changed by someone working in another medium across the room.</p>
+      </div>
+      <div class="col-media">
+        <figure class="figure center-top">
+          <img alt="Artists in conversation around works in progress" loading="lazy"
+               src="media/Archive/artist-collab-1.jpg">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== panoramic band ===== -->
+<div class="band" role="img" aria-label="Wide view of the inland Sicilian countryside">
+  <img class="parallax-img" data-parallax="0.12" alt="" loading="lazy"
+       src="media/Archive/palermo%201.jpg"
+       onerror="this.style.display='none'">
+  <div class="tag">
+    <div class="coords">37.93523° N · 13.67945° E</div>
+    <div class="place">An hour from Palermo, a world from the coast</div>
+  </div>
+</div>
+
+<!-- ===== the place ===== -->
+<section id="place">
+  <div class="wrap">
+    <div class="split rev reveal">
+      <div class="col-media">
+        <figure class="figure wide center-top">
+          <img alt="Market streets and old stone buildings near Palermo" loading="lazy"
+               src="media/Archive/palermo%201.jpg">
+        </figure>
+      </div>
+      <div class="col-text">
+        <p class="eyebrow">The place</p>
+        <h2 class="display">Hill country, in the interior.</h2>
+        <p>The residency sits in the hills of inland Sicily — wheat, olives, and almonds; stone towns along the ridgelines; long golden light. It's about an hour from the city and a world away from the beaches.</p>
+        <p>Days are unhurried and <strong>meals are shared.</strong> Interior Sicily feeds you well and cheaply, and the table is where most of the real collaboration tends to happen.</p>
+        <p>At the heart of it is a family house — opened to artists, for the first time, as a place to gather and make.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== what's included ===== -->
+<section class="included" style="background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">What we provide</p>
+      <h2 class="display">We take care of the space. You bring the rest.</h2>
+    </div>
+    <div class="cards reveal">
+      <div class="card">
+        <span class="n">i.</span>
+        <h3>Studios &amp; tools</h3>
+        <p>A shared making space, a room for sound and composition, room for sculpture and print, plus printers and scanners.</p>
+      </div>
+      <div class="card">
+        <span class="n">ii.</span>
+        <h3>A place to sleep</h3>
+        <p>Simple, comfortable housing in and around the house. Configuration varies by season and cohort.</p>
+      </div>
+      <div class="card">
+        <span class="n">iii.</span>
+        <h3>A shared table</h3>
+        <p>Communal meals most days, cooked from what the valley grows. The table is part of the work.</p>
+      </div>
+      <div class="card">
+        <span class="n">iv.</span>
+        <h3>What to bring</h3>
+        <p>Your travel, your materials, and a project you'd happily abandon for a better one that finds you here.</p>
+      </div>
+    </div>
+    <div class="included-media reveal">
+      <figure class="figure">
+        <img alt="A studio set up with recording equipment for resident artists" loading="lazy" src="media/Archive/recording-studio.jpg">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== people ===== -->
+<section class="people" id="people">
+  <div class="wrap">
+    <div class="people-head reveal">
+      <div>
+        <p class="eyebrow">Who is opening the doors</p>
+        <h2 class="display">Built by artists, for artists.</h2>
+      </div>
+      <p>The Vizzi family is opening the house as a working place for artists: a few residents at a time, a shared rhythm, and enough structure to make the time feel held without turning it into school.</p>
+    </div>
+    <div class="people-grid reveal">
+      <article class="person">
+        <figure><img alt="Portrait of Sebastian Vizzi" loading="lazy" src="media/Archive/sebastian-headshot.webp"></figure>
+        <div class="person-copy">
+          <span class="role">Vizzi family</span>
+          <h3>Sebastian Vizzi</h3>
+          <p>Artist and filmmaker working as Sebastian Blue, with a portfolio spanning image, film, and web-based storytelling. Sebastian helps steward the house as it becomes a working place for creative community in Sicily.</p>
+          <a class="person-link" href="https://sebastian.blue" target="_blank" rel="noopener">sebastian.blue</a>
+        </div>
+      </article>
+      <article class="person">
+        <figure><img alt="Portrait of Nicholas" loading="lazy" src="media/Archive/nicholas-headshot.png"></figure>
+        <div class="person-copy">
+          <span class="role">Vizzi family</span>
+          <h3>Nicholas Vizzi</h3>
+          <p>Artist and maker whose site moves between analog and digital drawing, comics, writing, video, animation, code, and playable projects. Nicholas helps shape the residency around generous, practical conditions for artists.</p>
+          <a class="person-link" href="https://nicholasvizzi.net" target="_blank" rel="noopener">nicholasvizzi.net</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== details accordion ===== -->
+<section id="details">
+  <div class="wrap details-wrap">
+    <div class="reveal" style="margin-bottom:clamp(28px,4vw,44px)">
+      <p class="eyebrow">The fine print</p>
+      <h2 class="display" style="font-size:clamp(28px,4vw,46px);font-weight:300">Details &amp; how it works</h2>
+    </div>
+    <div class="reveal">
+      <details open>
+        <summary>Who should apply <span class="plus" aria-hidden="true"></span></summary>
+        <div class="body">
+          <p>Artists early in their careers — recent graduates and those a few years out — working in performance, music and composition, sculpture, printmaking, comics, photography, or visual art. The first cohorts are deliberately small and cross-disciplinary.</p>
+          <p>You should be comfortable working independently, and glad to share a studio and a table with people working in other media.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How to apply <span class="plus" aria-hidden="true"></span></summary>
+        <div class="body">
+          <p>The best first step is to register your interest — tell us who you are, what you make, and what you'd hope to do with two unhurried weeks.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Costs &amp; financial support <span class="plus" aria-hidden="true"></span></summary>
+        <div class="body">
+          <p>The fee is $500 for two weeks, plus housing, which varies by cohort and room configuration. Artists cover their own travel, food, and materials. Material and travel support will be added as the residency can sustain it.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Dates &amp; getting there <span class="plus" aria-hidden="true"></span></summary>
+        <div class="body">
+          <p>Sessions run in the gentle shoulder seasons — spring and fall — when the interior is at its best for working. Dates are announced ahead of each cohort.</p>
+          <p>The nearest airport is Palermo (Falcone–Borsellino), roughly 90 minutes away by road. Arrivals are batched on set days with a shared ride from the airport; there's also a rail option through the nearby valley for those travelling light.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="gallery reveal" aria-label="Residency studios and work in progress">
+      <figure class="figure center-top"><img alt="Printmaking demonstration in the studio" loading="lazy" src="media/Archive/printmaking-demo.jpg"></figure>
+      <figure class="figure center-top"><img alt="Artists collaborating around a studio table" loading="lazy" src="media/Archive/artist-collab-big-table.jpg"></figure>
+      <figure class="figure center-top"><img alt="Recording studio equipment for sound and composition" loading="lazy" src="media/Archive/recording-studio.jpg"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== apply band ===== -->
+<section class="apply" id="apply">
+  <div class="wrap reveal">
+    <p class="eyebrow">Register interest</p>
+    <h2 class="display">Tell us who you are, and what you'd <em>bring.</em></h2>
+    <p>If a quiet, generous two weeks in the Sicilian interior sounds like the thing you need, send a note here.</p>
+    <form class="interest-form" action="mailto:vizzinicholas@gmail.com,sebastianbluemusic@gmail.com" method="post" enctype="text/plain">
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="Name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="discipline">Discipline</label>
+          <input id="discipline" name="Discipline" placeholder="Music, print, comics, performance...">
+        </div>
+        <div class="field">
+          <label for="website">Website / portfolio</label>
+          <input id="website" name="Website" type="url" placeholder="https://">
+        </div>
+        <div class="field full">
+          <label for="message">What would you want to work on?</label>
+          <textarea id="message" name="Message" required></textarea>
+        </div>
+      </div>
+      <button class="btn" type="submit">Send interest</button>
+      <p class="form-note">This form opens your email app with the message addressed to the Vizzi residency inboxes.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer>
+  <div class="foot-in">
+    <div>
+      <span class="mark">Vizzi <span>Art Alliance</span></span>
+      <p style="margin:0;max-width:34ch">A residency in the hills of inland Sicily. A place for emerging artists to muse, play, and make together.</p>
+      <p class="memoriam">In memory of Steve Vizzi.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#residency">The residency</a></li>
+        <li><a href="#place">The place</a></li>
+        <li><a href="#included">What's included</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#details">Details</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href="mailto:vizzinicholas@gmail.com">vizzinicholas@gmail.com</a></li>
+        <li><a href="mailto:sebastianbluemusic@gmail.com">sebastianbluemusic@gmail.com</a></li>
+        <li><span class="coords">37.93523° N · 13.67945° E</span></li>
+        <li>Province of Palermo, Sicily</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fineprint">
+    © 2026 Vizzi Art Alliance
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var narrow = window.matchMedia('(max-width: 760px)').matches;
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+    if(reduce || narrow || !els.length){return;}
+
+    var ticking = false;
+    function update(){
+      var vh = window.innerHeight || 1;
+      els.forEach(function(el){
+        var speed = parseFloat(el.getAttribute('data-parallax')) || 0.12;
+        var rect = el.getBoundingClientRect();
+        if(rect.bottom < 0 || rect.top > vh){return;}
+        var progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        el.style.transform = 'translate3d(0,' + (progress * speed * -120) + 'px,0) scale(1.04)';
+      });
+      ticking = false;
+    }
+    function requestTick(){
+      if(!ticking){
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    update();
+    window.addEventListener('scroll', requestTick, {passive:true});
+    window.addEventListener('resize', requestTick);
+  })();
+</script>
+</body>
+</html>
